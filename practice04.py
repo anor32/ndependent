@@ -1,43 +1,123 @@
 # 1 задание
-class Circle:
-    def __init__(self, radius):
-        self.radius = radius
 
-    def get_len(self):
-        return round(2 * (3.14 * self.radius))
+#
+# class Circle:
+#     def __init__(self, radius):
+#         self.radius = radius
+#
+#     def get_len(self):
+#         return round(2 * (3.14 * self.radius))
+#
+#     def get_circle_area(self):
+#         return 3.14 * (self.radius) ** 2
+#
+#
+# class Square:
+#     def __init__(self, side):
+#         self.side = side
+#
+#     def get_side(self):
+#         return self.side * 4
+#
+#     def get_square_area(self):
+#         return self.side*self.side
+#
+#
+# class SquareInCircle(Circle, Square):
+#     def __init__(self, radius, side):
+#         super().__init__(radius,side)
+#
+#
+#     def get_circle_area(self):
+#         return 3.14 * (self.radius) ** 2
+#
 
-    def get_circle_area(self):
-        return 3.14 * (self.radius) ** 2
+# ball = Circle(40)
+# print(ball.get_len())
+# print(ball.get_circle_area())
+#
+# tetr = Square(10)
+# print(tetr.get_square_area())
+# print(tetr.get_side())
+#
+# tetr_in_ball = SquareInCircle(40, 10)
+# print(tetr_in_ball.get_side())
+# print(tetr_in_ball.get_square_area())
+#
+# # 2 задание
+class Wheels:
+    def __init__(self, type_rubber, load_index):
+        self.__type_rubber = type_rubber
+        self.__load_index = load_index
+
+    @property
+    def type_rubber(self):
+        return self.__type_rubber
+
+    @property
+    def load_index(self):
+        return self.__load_index
+
+    @type_rubber.setter
+    def type_rubber(self, new_type):
+        self.type_rubber = new_type
 
 
-class Square:
-    def __init__(self, side):
-        self.side = side
+class Engine:
+    def __init__(self, count_cilindres, material):
+        self.__count_cilindres = count_cilindres
+        self.__material = material
 
-    def get_side(self):
-        return self.side * 4
+    @property
+    def count_cilindres(self):
+        return self.__count_cilindres
 
-    def get_square_area(self):
-        return 4 * self.radius ** 2
+    @property
+    def material(self):
+        return self.__material
 
-
-class SquareInCircle(Circle, Square):
-    def __init__(self, radius, side):
-        super().__init__(radius)
-
-
-    def get_circle_area(self):
-        return 3.14 * (self.radius) ** 2
+    @count_cilindres.setter
+    def count_cilindres(self, new_amount):
+        self.__count_cilindres = new_amount
 
 
-ball = Circle(40)
-print(ball.get_len())
-print(ball.get_circle_area())
+class Doors:
+    def __init__(self, count_doors, material_doors):
+        self.__count_doors = count_doors
+        self.__material_doors = material_doors
 
-tetr = Square(10)
-print(tetr.get_square_area())
-print(tetr.get_side())
+    @property
+    def count_doors(self):
+        return self.__count_doors
 
-tetr_in_ball = SquareInCircle(40, 10)
-print(tetr_in_ball.get_side())
-print(tetr_in_ball.get_square_area())
+    @property
+    def material_doors(self):
+        return self.__material_doors
+
+    @count_doors.setter
+    def count_doors(self, new_amount):
+        self.__type_rubber = new_amount
+
+
+class Automobile:
+    def __init__(self, obj_wheels, obj_engine, obj_doors):
+        self.obj_wheels = obj_wheels
+        self.obj_engine = obj_engine
+        self.obj_doors = obj_doors
+
+    def get_info_auto(self):
+        print(self.obj_wheels.type_rubber)
+        print(self.obj_wheels.load_index)
+
+        print(self.obj_engine.material)
+        print(self.obj_engine.count_cilindres)
+
+        print(self.obj_doors.count_doors)
+        print(self.obj_doors.material_doors)
+
+
+wh = Wheels("winter","78")
+eng = Engine("4","carbon")
+drs = Doors("4","oak")
+bmv = Automobile(wh,eng,drs)
+bmv.get_info_auto()
