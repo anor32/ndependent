@@ -1,5 +1,5 @@
 # 1 задание
-from symtable import Class
+
 
 #
 # class Circle:
@@ -197,39 +197,48 @@ from symtable import Class
 
 
 class HomePet:
-    def __init__(self,name,type_a,sound):
-        self.__name =name
-        self.__type_a =type_a
-        self.__sound =sound
+    def __init__(self, name, type_a, sound):
+        self.__name = name
+        self.__type_a = type_a
+        self.__sound = sound
 
-    def get_name(self):
-        print(self.__name)
+    @property
+    def name(self):
+        return self.__name
 
-    def get_sound(self):
-        print(f" {self.__name} издает звук")
-    def get_type(self):
-        print(f"это животное типа {self.__type_a}")
+    @property
+    def sound(self):  # Provide the simple sound
+        return self.__sound
+
+    @property
+    def type(self):
+        return f"это животное типа {self.__type_a}"
+
+    def say_sound(self):
+        return f"{self.__name} издает звуки"
 
 
 class Dog(HomePet):
     def __init__(self, name,type_a,sound):
         super().__init__(name,type_a,sound)
 
-    def get_sound(self):
-        print(f"{self.__name} Лает {self.__sound}")
+    def say_sound(self):
+        print(f"{self.name} Лает {self.sound}")
+
+
 #
 class Cat(HomePet):
     def __init__(self, name, type_a, sound):
         super().__init__(name, type_a, sound)
 
-    def get_sound(self):
-        print(f" {self.__name} мяукает {self.__sound}")
+    def say_sound(self):
+        print(f" {self.name} мяукает {self.sound}")
 
 class Hamster(HomePet):
     def __init__(self, name,type_a,sound):
         super().__init__(name, type_a, sound)
 
-    def get_sound(self):
+    def say_sound(self):
         print(f" {self.__name} пищит {self.__sound}")
 
 
@@ -237,14 +246,69 @@ class Parrot(HomePet):
     def __init__(self, name,type_a,sound):
         super().__init__(name, type_a, sound)
 
-    def get_sound(self):
+    def say_sound(self):
+        return f"{self.name} разговаривает и издает звук {self.sound}"
+
 
         print(f"{self.__name} разговаривает и издает звук {self.__sound}")
 
-
-kesha = Parrot("kesha",'bird',"кар")
-kesha.get_sound()
-kesha.get_type()
-kesha.get_name()
+# my_hamster = Dog("Kesha", "Rodent", "пищит")
+# print(my_hamster.get_sound())
 
 
+kesha = Cat("kesha",'bird',"кар")
+print(kesha.say_sound())
+# kesha.get_type()
+# kesha.get_name()
+
+# kesha.get_type()
+# kesha.get_name()
+
+
+# class Employer:
+#     def __init__(self, name, last_name, age):
+#         self.name = name
+#         self.last_name = last_name
+#         self.age = age
+#
+#     def print_info(self):
+#         print("This is employer class", "his name", self.name, self.last_name, "his age", self.age)
+#
+#     def __int__(self):
+#         print("magic")
+#         return int(self.age)
+#
+#     def __str__(self):
+#         return f"{self.name} разобрался с работой методов стр и инт"
+#
+#
+# class President(Employer):
+#     def __init__(self, name, last_name, age):
+#         super().__init__(name, last_name, age)
+#
+#     def print_info(self):
+#         print("This is President class", "his name", self.name, self.last_name, "his age", self.age)
+#
+#
+# class Manager(Employer):
+#     def __init__(self, name, last_name, age):
+#         super().__init__(name, last_name, age)
+#
+#     def print_info(self):
+#         print("This is Manager class", "his name", self.name, self.last_name, "his age", self.age)
+#
+#
+# class Worker(Employer):
+#     def __init__(self, name, last_name, age):
+#         super().__init__(name, last_name, age)
+#
+#     def print_info(self):
+#         print("This is Worker class", "his name", self.name, self.last_name, "his age", self.age)
+#
+#
+# emp = Employer("андрей", "никанов", "24")
+#
+# man = Manager("Дмитрий", "Нормальнов", "27")
+#
+# emp.print_info()
+# man.print_info()
