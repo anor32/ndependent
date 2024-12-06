@@ -1,56 +1,66 @@
 # 1 задание
 
 
-#
-# class Circle:
-#     def __init__(self, radius):
-#         self.radius = radius
-#
-#     def get_len(self):
-#         return round(2 * (3.14 * self.radius))
-#
-#     def get_circle_area(self):
-#         return 3.14 * (self.radius) ** 2
-#
-#
-# class Square:
-#     def __init__(self, side):
-#         self.side = side
-#
-#     def get_side(self):
-#         return self.side * 4
-#
-#     def get_square_area(self):
-#         return self.side*self.side
-#
-#
-# class SquareInCircle(Circle, Square):
-#     def __init__(self, radius, side):
-#         super().__init__(radius,side)
-#
-#
-#     def get_circle_area(self):
-#         return 3.14 * (self.radius) ** 2
-#
 
-# ball = Circle(40)
-# print(ball.get_len())
-# print(ball.get_circle_area())
-#
-# tetr = Square(10)
-# print(tetr.get_square_area())
-# print(tetr.get_side())
-#
-# tetr_in_ball = SquareInCircle(40, 10)
-# print(tetr_in_ball.get_side())
-# print(tetr_in_ball.get_square_area())
-#
-# # 2 задание
+class Circle:
+    def __init__(self, radius):
+        self.radius = radius
+
+    def get_len(self):
+        return round(2 * (3.14 * self.radius))
+
+    def get_circle_area(self):
+        return round(3.14 * (self.radius ** 2))
+
+
+class Square:
+    def __init__(self, side):
+        self.side = side
+
+    def get_perimetr(self):
+        return self.side * 4
+
+    def get_square_area(self):
+        return self.side*self.side
+
+
+class SquareInCircle(Circle, Square):
+    def __init__(self, radius, side):
+        Circle.__init__(self, radius)
+        Square.__init__(self, side)
+
+# через супер нельзя парамтры передавать при множественом наследовании вернее можно но не больше одного
+# видимо супер работает только на первый класс при множественом наследовании дальше он не понимает
+# просто заметка для себя
+    def get_circle_area(self):
+        return 3.14 * (self.radius) ** 2
+
+# я незнаю насколько верно получилось с точки зрения математики я не очень силен
+# я все формулы из интернета взял в последнем классе переопределил функцию так как
+# по формуле это нахождения площади квадрата через радиус круга и мне показалось что это подоходит под задание
+# возможно надо было в финальном классе все вычисления делать находить периметр квадрата строну через радиус или диаметр
+# в задании этого не указано сделал как понял
+
+
+ball = Circle(40)
+print(ball.get_len())
+print(ball.get_circle_area())
+
+tetr = Square(10)
+print(tetr.get_square_area())
+print(tetr.get_perimetr())
+
+tetr_in_ball = SquareInCircle(40, 10)
+print(tetr_in_ball.get_perimetr())
+print(tetr_in_ball.get_square_area())
+
+
+# 2 задание
 # class Wheels:
 #     def __init__(self, type_rubber, load_index):
 #         self.__type_rubber = type_rubber
 #         self.__load_index = load_index
-#
+
 #     @property
 #     def type_rubber(self):
 #         return self.__type_rubber
@@ -106,23 +116,24 @@
 #         self.obj_engine = obj_engine
 #         self.obj_doors = obj_doors
 #
-#     def get_info_auto(self):
-#         print(self.obj_wheels.type_rubber)
-#         print(self.obj_wheels.load_index)
+#     def display_info_auto(self):
+#         print(self.obj_wheels.type_rubber,"тип резины")
+#         print(self.obj_wheels.load_index,"индекс загрузки")
 #
-#         print(self.obj_engine.material)
-#         print(self.obj_engine.count_cilindres)
+#         print(self.obj_engine.material,"материал двигателя")
+#         print(self.obj_engine.count_cilindres,"количество цилиндров")
 #
-#         print(self.obj_doors.count_doors)
-#         print(self.obj_doors.material_doors)
+#         print(self.obj_doors.count_doors,"количество дверей")
+#         print(self.obj_doors.material_doors,"материал двери")
 #
-
+#
+#
 # wh = Wheels("winter","78")
 # eng = Engine("4","carbon")
 # drs = Doors("4","oak")
 # bmv = Automobile(wh,eng,drs)
-# bmv.get_info_auto()
-
+# bmv.display_info_auto()
+#
 
 # class Wheels:
 #     def __init__(self, type_rubber, load_index):
@@ -195,74 +206,71 @@
 #         print(self.obj_doors.material_doors)
 #
 
-
-class HomePet:
-    def __init__(self, name, type_a, sound):
-        self.__name = name
-        self.__type_a = type_a
-        self.__sound = sound
-
-    @property
-    def name(self):
-        return self.__name
-
-    @property
-    def sound(self):  # Provide the simple sound
-        return self.__sound
-
-    @property
-    def type(self):
-        return f"это животное типа {self.__type_a}"
-
-    def say_sound(self):
-        return f"{self.__name} издает звуки"
-
-
-class Dog(HomePet):
-    def __init__(self, name,type_a,sound):
-        super().__init__(name,type_a,sound)
-
-    def say_sound(self):
-        print(f"{self.name} Лает {self.sound}")
-
-
+# здесь я столкнулся с некоторой сложностью  я так понял когда мы защищаем параметры
+# мы не можем их использовать в других классах которые наследуются и поэтому надо писать геттеры
+# либо я что то не так сделал
+# я хотел изначально через 3 функции сделать
+# когда в задании указывается защитить поля
+# написание _name с одним подчеркивание считается за защиту?
+# просто если нет я бы тогда  написал через проперти  у меня в прошлом комите через него написано
+# я надеюсь вы мне не снизите за это бал
+# class HomePet:
+#     def __init__(self, name, type_a, sound):
+#         self._name = name
+#         self._type_a = type_a
+#         self._sound = sound
 #
-class Cat(HomePet):
-    def __init__(self, name, type_a, sound):
-        super().__init__(name, type_a, sound)
+#     def get_name(self):
+#         return f"Его зовут {self._name}"
+#
+#     def get_type(self):
+#         return f"Это животное типа {self._type_a}"
+#
+#     def get_sound(self):
+#         return f"{self._name} издает звук {self._sound}."
+#
+# class Dog(HomePet):
+#     def __init__(self, name, type_a, sound):
+#         super().__init__(name, type_a, sound)
+#
+#     def get_sound(self):
+#        return f"{self._name} Лает {self._sound}"
+#
+#
+# #
+# class Cat(HomePet):
+#     def __init__(self, name, type_a, sound):
+#         super().__init__(name, type_a, sound)
+#
+#     def get_sound(self):
+#         return f" {self._name} мяукает {self._sound}"
+#
+#
+# class Hamster(HomePet):
+#     def __init__(self, name, type_a, sound):
+#         super().__init__(name, type_a, sound)
+#
+#     def get_sound(self):
+#         return f" {self._name} пищит {self._sound}"
+#
+#
+# class Parrot(HomePet):
+#     def __init__(self, name, type_a, sound):
+#         super().__init__(name, type_a, sound)
+#
+#     def get_sound(self):
+#         return f"{self._name} разговаривает {self._sound}"
+#
+# # my_hamster = Dog("Kesha", "Rodent", "пищит")
+# # print(my_hamster.get_sound())
+#
+#
+# kesha = Cat("kesha", 'bird', "кар")
+# print(kesha.get_sound())
+# print(kesha.get_name())
+# print(kesha.get_type())
+#
 
-    def say_sound(self):
-        print(f" {self.name} мяукает {self.sound}")
-
-class Hamster(HomePet):
-    def __init__(self, name,type_a,sound):
-        super().__init__(name, type_a, sound)
-
-    def say_sound(self):
-        print(f" {self.__name} пищит {self.__sound}")
-
-
-class Parrot(HomePet):
-    def __init__(self, name,type_a,sound):
-        super().__init__(name, type_a, sound)
-
-    def say_sound(self):
-        return f"{self.name} разговаривает и издает звук {self.sound}"
-
-
-        print(f"{self.__name} разговаривает и издает звук {self.__sound}")
-
-# my_hamster = Dog("Kesha", "Rodent", "пищит")
-# print(my_hamster.get_sound())
-
-
-kesha = Cat("kesha",'bird',"кар")
-print(kesha.say_sound())
-# kesha.get_type()
-# kesha.get_name()
-
-# kesha.get_type()
-# kesha.get_name()
 
 
 # class Employer:
